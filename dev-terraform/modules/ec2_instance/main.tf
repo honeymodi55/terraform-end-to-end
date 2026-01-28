@@ -8,7 +8,7 @@ resource "aws_instance" "ec2_1" {
   instance_type = var.instance_type_value
   
   tags = {
-    Name = "terraform-instance"
+    Name = "terraform-ec2-instance"
   }
 }
 
