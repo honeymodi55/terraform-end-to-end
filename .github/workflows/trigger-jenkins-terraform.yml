@@ -10,7 +10,17 @@ jobs:
   trigger_jenkins:
     runs-on: ubuntu-latest
     steps:
+      - name: Get Jenkins crumb
+        id: crumb
+        run: |
+          CRUMB_JSON=$(curl -sS -u "${{ secrets.JENKINS_USER }}:${{ secrets.JENKINS_API_TOKEN }}" \
+            "${{ secrets.JENKINS_URL }}/crumbIssuer/api/json")
+          echo "crumb=$(echo "$CRUMB_JSON" | python3 -c "import sys,json; print(json.load(sys.stdin)['crumb'])")" >> $GITHUB_OUTPUT
+          echo "crumbField=$(echo "$CRUMB_JSON" | python3 -c "import sys,json; print(json.load(sys.stdin)['crumbRequestField'])")" >> $GITHUB_OUTPUT
+      
       - name: Trigger Jenkins Job
         run: |
           curl -sS -X POST \
-            "${{ secrets.JENKINS_JOB_URL }}/build?token=${{ secrets.JENKINS_TRIGGER_TOKEN }}"
+            -u "${{ secrets.JENKINS_USER }}:${{ secrets.JENKINS_API_TOKEN }}" \
+            -H "${{ steps.crumb.outputs.crumbField }}: ${{ steps.crumb.outputs.crumb }}" \
+            "${{ secrets.JENKINS_JOB_URL }}/build"
