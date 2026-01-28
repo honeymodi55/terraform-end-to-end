@@ -10,28 +10,34 @@ pipeline {
         
         stage("Terraform Version") {
             steps {
-                sh '''
-                    set -e
-                    terraform version
-                '''
+                dir('dev-terraform') {
+                    sh '''
+                        set -e
+                        terraform version
+                    ''' 
+                }
             }
         }
            
         stage("Terraform Initialization") {
             steps {
-                sh '''
-                    set -e
-                    terraform init -upgrade
-                '''
+                dir('dev-terraform') {
+                    sh '''
+                        set -e
+                        terraform init -upgrade
+                    '''
+                }
             }
         }
         
         stage("Terraform Plan") {
             steps {
-                sh '''
-                    set -e
-                    terraform plan -no-color -out=tfplan
-                '''
+                dir('dev-terraform') {
+                    sh '''
+                        set -e
+                        terraform plan -no-color -out=tfplan
+                    '''
+                }
             }
         }
         
@@ -43,10 +49,12 @@ pipeline {
         
         stage("Terraform Apply") {
             steps {
-                sh '''
-                    set -e
-                    terraform apply -no-color -auto-approve tfplan
-                '''
+                dir('dev-terraform') {
+                    sh '''
+                        set -e
+                        terraform apply -no-color -auto-approve tfplan
+                    '''
+                }
             }
         }
     }
@@ -55,7 +63,9 @@ pipeline {
         always {
             script {
                 catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
-                    sh 'terraform version || true'
+                    dir('dev-terraform') {
+                        sh 'terraform version || true'
+                    }
                 }
             }
         }
@@ -64,4 +74,3 @@ pipeline {
         }
     }
 }
-
