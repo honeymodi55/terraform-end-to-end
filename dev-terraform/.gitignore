@@ -8,6 +8,6 @@
 .terraform.lock.hcl
 
 #Ignore ec2_instance module creation
-modules/ec2_instance/
+#modules/ec2_instance/
 
 
