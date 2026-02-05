@@ -7,7 +7,7 @@ resource "aws_vpc" "api-app-eks-vpc" {
     }
 }
 
-#Internet Gateway for Inbound/Outbound traffic to public subnet
+#Internet Gateway for Inbound/Outbound traffic to public subnets
 resource "aws_internet_gateway" "apiAppEKS-publicSubnet-IG" {
   vpc_id = aws_vpc.api-app-eks-vpc.id
   tags = {
