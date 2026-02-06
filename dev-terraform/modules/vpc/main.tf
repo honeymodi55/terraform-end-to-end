@@ -19,7 +19,7 @@ resource "aws_internet_gateway" "apiAppEKS-publicSubnet-IG" {
 resource "aws_subnet" "apiAppEKS-publicSubnet" {
   vpc_id = aws_vpc.api-app-eks-vpc.id
   cidr_block = var.public_cidr
-  availability_zone = var.availability-zone-2a
+  availability_zone = var.availability_zone_2a
   tags = {
     Name = "apiAppEKS-publicSubnet"
   }
@@ -46,7 +46,7 @@ resource "aws_nat_gateway" "ApiAppEKS-NAT" {
 resource "aws_subnet" "apiAppEKS-privateSubnet-2a" {
   vpc_id = aws_vpc.api-app-eks-vpc.id
   cidr_block = var.private_cidr
-  availability_zone = var.availability-zone-2a
+  availability_zone = var.availability_zone_2a
   tags = {
     Name = "apiAppEKS-privateSubnet-2a"
   }
@@ -55,7 +55,7 @@ resource "aws_subnet" "apiAppEKS-privateSubnet-2a" {
 resource "aws_subnet" "apiAppEKS-privateSubnet-2b" {
   vpc_id = aws_vpc.api-app-eks-vpc.id
   cidr_block = var.private_cidr
-  availability_zone = var.availability-zone-2b
+  availability_zone = var.availability_zone_2b
   tags = {
     Name = "apiAppEKS-privateSubnet-2b"
   }
