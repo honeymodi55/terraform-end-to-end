@@ -26,6 +26,7 @@ module "vpc" {
   availability-zone = "us-west-2a"
 }
 
+#using Official EKS module for creating cluster and its managed node pools
 module "eks" {
   source = "terraform-aws-modules/eks/aws"
   version = "~> 21.0"
