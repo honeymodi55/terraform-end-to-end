@@ -19,7 +19,7 @@ resource "aws_internet_gateway" "apiAppEKS-publicSubnet-IG" {
 resource "aws_subnet" "apiAppEKS-publicSubnet" {
   vpc_id = aws_vpc.api-app-eks-vpc.id
   cidr_block = var.public_cidr
-  availability_zone = var.availability-zone
+  availability_zone = var.availability-zone-2a
   tags = {
     Name = "apiAppEKS-publicSubnet"
   }
