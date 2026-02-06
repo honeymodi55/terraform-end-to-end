@@ -23,7 +23,8 @@ module "vpc" {
   vpc_cidr = "10.0.0.0/16"
   public_cidr = "10.0.1.0/24"
   private_cidr = "10.0.2.0/24"
-  availability-zone = "us-west-2a"
+  availability_zone_2a = "us-west-2a"
+  availability_zone_2b = "us-west-2b"
 }
 
 #using Official EKS module for creating cluster and its managed node pools
