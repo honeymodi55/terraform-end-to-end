@@ -43,8 +43,8 @@ module "eks" {
   authentication_mode = "API_AND_CONFIG_MAP"
 
   vpc_id = module.vpc.vpc_id  
-  subnet_ids = [ module.vpc.private_subnet_id ] #for worker nodes
-  control_plane_subnet_ids = [ module.vpc.private_subnet_id ] #for control plane
+  subnet_ids = [ module.vpc.private_subnet_id_2a, module.vpc.private_subnet_id_2b ] #for worker nodes
+  control_plane_subnet_ids = [ module.vpc.private_subnet_id_2a, module.vpc.private_subnet_id_2b ] #for control plane
 
   #EKS managed node group
   eks_managed_node_groups = {

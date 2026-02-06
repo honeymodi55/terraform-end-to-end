@@ -1,4 +1,5 @@
 vpc_cidr = "10.0.0.0/16"
 public_cidr = "10.0.1.0/24"
 private_cidr = "10.0.2.0/24"
-availability-zone = "us-west-2a"
+availability-zone-2a = "us-west-2a"
+availability-zone-2b = "us-west-2b"

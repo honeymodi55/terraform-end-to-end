@@ -42,16 +42,27 @@ resource "aws_nat_gateway" "ApiAppEKS-NAT" {
 }
 
 #Private Subnet (for EKS Nodes)
-resource "aws_subnet" "apiAppEKS-privateSubnet" {
+#private subnet in "us-west-2a"
+resource "aws_subnet" "apiAppEKS-privateSubnet-2a" {
   vpc_id = aws_vpc.api-app-eks-vpc.id
   cidr_block = var.private_cidr
-  availability_zone = var.availability-zone
+  availability_zone = var.availability-zone-2a
   tags = {
-    Name = "apiAppEKS-privateSubnet"
+    Name = "apiAppEKS-privateSubnet-2a"
+  }
+}
+#private subnet in "us-west-2b"
+resource "aws_subnet" "apiAppEKS-privateSubnet-2b" {
+  vpc_id = aws_vpc.api-app-eks-vpc.id
+  cidr_block = var.private_cidr
+  availability_zone = var.availability-zone-2b
+  tags = {
+    Name = "apiAppEKS-privateSubnet-2b"
   }
 }
 
 #Route Tables
+#for public subnet
 resource "aws_route_table" "apiAppEKS-publicSubnet-Route" {
   vpc_id = aws_vpc.api-app-eks-vpc.id
   route {
@@ -59,6 +70,8 @@ resource "aws_route_table" "apiAppEKS-publicSubnet-Route" {
     gateway_id = aws_internet_gateway.apiAppEKS-publicSubnet-IG.id
   }
 }
+
+#for private subnet 2a & 2b
 resource "aws_route_table" "apiAppEKS-privateSubnet-Route" {
   vpc_id = aws_vpc.api-app-eks-vpc.id
   route {
@@ -67,12 +80,18 @@ resource "aws_route_table" "apiAppEKS-privateSubnet-Route" {
   }
 }
 
+
 #Route Table Associations to subnets
 resource "aws_route_table_association" "apiAppEKS-publicSubnet-Route-Association" {
   subnet_id = aws_subnet.apiAppEKS-publicSubnet.id
   route_table_id = aws_route_table.apiAppEKS-publicSubnet-Route.id
 }
-resource "aws_route_table_association" "apiAppEKS-privateSubnet-Route-Association" {
-  subnet_id = aws_subnet.apiAppEKS-privateSubnet.id
+resource "aws_route_table_association" "apiAppEKS-privateSubnet-2a-Route-Association" {
+  subnet_id = aws_subnet.apiAppEKS-privateSubnet-2a.id
+  route_table_id = aws_route_table.apiAppEKS-privateSubnet-Route.id
+}
+
+resource "aws_route_table_association" "apiAppEKS-privateSubnet-2b-Route-Association" {
+  subnet_id = aws_subnet.apiAppEKS-privateSubnet-2b.id
   route_table_id = aws_route_table.apiAppEKS-privateSubnet-Route.id
 }

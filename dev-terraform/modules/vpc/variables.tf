@@ -13,7 +13,12 @@ variable "private_cidr" {
   type = string
 }
 
-variable "availability-zone" {
-  description = "AZ for public and private subnets"
+variable "availability-zone-2a" {
+  description = "us-west-2a AZ for public and private subnets"
+  type = string
+}
+
+variable "availability-zone-2b" {
+  description = "us-west-2b AZ for public and private subnets"
   type = string
 }

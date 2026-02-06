@@ -6,6 +6,9 @@ output "public_subnet_id" {
   value = aws_subnet.apiAppEKS-publicSubnet.id
 }
 
-output "private_subnet_id" {
-  value = aws_subnet.apiAppEKS-privateSubnet.id
+output "private_subnet_id_2a" {
+  value = aws_subnet.apiAppEKS-privateSubnet-2a.id
+}
+output "private_subnet_id_2b" {
+  value = aws_subnet.apiAppEKS-privateSubnet-2b.id
 }
