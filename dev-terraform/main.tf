@@ -26,6 +26,7 @@ module "vpc" {
   private_cidr_2b = "10.0.11.0/24"
   availability_zone_2a = "us-west-2a"
   availability_zone_2b = "us-west-2b"
+  cluster_name = "apiApp-cluster"
 }
 
 #using Official EKS module for creating cluster and its managed node pools

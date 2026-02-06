@@ -49,6 +49,7 @@ resource "aws_subnet" "apiAppEKS-privateSubnet-2a" {
   availability_zone = var.availability_zone_2a
   tags = {
     Name = "apiAppEKS-privateSubnet-2a"
+    "kubernetes.io/cluster/${var.cluster_name}" = "owned"
   }
 }
 #private subnet in "us-west-2b"
@@ -58,6 +59,7 @@ resource "aws_subnet" "apiAppEKS-privateSubnet-2b" {
   availability_zone = var.availability_zone_2b
   tags = {
     Name = "apiAppEKS-privateSubnet-2b"
+    "kubernetes.io/cluster/${var.cluster_name}" = "owned"
   }
 }
 
