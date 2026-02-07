@@ -49,7 +49,7 @@ module "eks" {
   subnet_ids = [ module.vpc.private_subnet_id_2a, module.vpc.private_subnet_id_2b ] #for worker nodes
   control_plane_subnet_ids = [ module.vpc.private_subnet_id_2a, module.vpc.private_subnet_id_2b ] #for control plane
 
-  #EKS managed node group
+  #EKS managed node groups
   eks_managed_node_groups = {
     api_node = {
       ami_type = "AL2023_x86_64_STANDARD"
