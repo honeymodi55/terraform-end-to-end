@@ -37,6 +37,17 @@ module "eks" {
   name = "apiApp-cluster"
   kubernetes_version = "1.33"
 
+  addons = {
+    coredns                = {}
+    eks-pod-identity-agent = {
+      before_compute = true
+    }
+    kube-proxy             = {}
+    vpc-cni                = {
+      before_compute = true
+    }
+  }
+
   endpoint_public_access = true
   create_cloudwatch_log_group = true
   cloudwatch_log_group_retention_in_days = 7
