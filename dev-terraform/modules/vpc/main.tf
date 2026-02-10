@@ -22,6 +22,8 @@ resource "aws_subnet" "apiAppEKS-publicSubnet" {
   availability_zone = var.availability_zone_2a
   tags = {
     Name = "apiAppEKS-publicSubnet"
+    "kubernetes.io/cluster/${var.cluster_name}" = "owned"
+    "kubernetes.io/role/elb" = "1"
   }
 }
 
