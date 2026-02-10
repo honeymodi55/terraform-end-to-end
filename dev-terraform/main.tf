@@ -21,7 +21,8 @@ provider "aws" {
 module "vpc" {
   source = "./modules/vpc"
   vpc_cidr = "10.0.0.0/16"
-  public_cidr = "10.0.1.0/24"
+  public_cidr_2a = "10.0.1.0/24"
+  public_cidr_2b = "10.0.2.0/24"
   private_cidr_2a = "10.0.10.0/24"
   private_cidr_2b = "10.0.11.0/24"
   availability_zone_2a = "us-west-2a"

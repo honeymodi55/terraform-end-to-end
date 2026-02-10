@@ -16,10 +16,22 @@ resource "aws_internet_gateway" "apiAppEKS-publicSubnet-IG" {
 }
 
 #Public Subnet (for Load Balancers)
-resource "aws_subnet" "apiAppEKS-publicSubnet" {
+#public subnet in "us-west-2a"
+resource "aws_subnet" "apiAppEKS-publicSubnet-2a" {
   vpc_id = aws_vpc.api-app-eks-vpc.id
-  cidr_block = var.public_cidr
+  cidr_block = var.public_cidr_2a
   availability_zone = var.availability_zone_2a
+  tags = {
+    Name = "apiAppEKS-publicSubnet-2a"
+    "kubernetes.io/cluster/${var.cluster_name}" = "owned"
+    "kubernetes.io/role/elb" = "1"
+  }
+}
+#public subnet in "us-west-2b"
+resource "aws_subnet" "apiAppEKS-publicSubnet-2b" {
+  vpc_id = aws_vpc.api-app-eks-vpc.id
+  cidr_block = var.public_cidr_2b
+  availability_zone = var.availability_zone_2b
   tags = {
     Name = "apiAppEKS-publicSubnet"
     "kubernetes.io/cluster/${var.cluster_name}" = "owned"
@@ -66,7 +78,7 @@ resource "aws_subnet" "apiAppEKS-privateSubnet-2b" {
 }
 
 #Route Tables
-#for public subnet
+#for public subnet 2a & 2b
 resource "aws_route_table" "apiAppEKS-publicSubnet-Route" {
   vpc_id = aws_vpc.api-app-eks-vpc.id
   route {
@@ -86,8 +98,12 @@ resource "aws_route_table" "apiAppEKS-privateSubnet-Route" {
 
 
 #Route Table Associations to subnets
-resource "aws_route_table_association" "apiAppEKS-publicSubnet-Route-Association" {
-  subnet_id = aws_subnet.apiAppEKS-publicSubnet.id
+resource "aws_route_table_association" "apiAppEKS-publicSubnet-2a-Route-Association" {
+  subnet_id = aws_subnet.apiAppEKS-publicSubnet-2a.id
+  route_table_id = aws_route_table.apiAppEKS-publicSubnet-Route.id
+}
+resource "aws_route_table_association" "apiAppEKS-publicSubnet-2b-Route-Association" {
+  subnet_id = aws_subnet.apiAppEKS-publicSubnet-2b.id
   route_table_id = aws_route_table.apiAppEKS-publicSubnet-Route.id
 }
 resource "aws_route_table_association" "apiAppEKS-privateSubnet-2a-Route-Association" {
