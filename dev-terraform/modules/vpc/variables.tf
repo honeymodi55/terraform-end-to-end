@@ -28,10 +28,4 @@ variable "availability_zone_2a" {
 
 variable "availability_zone_2b" {
   description = "us-west-2b AZ for public and private subnets"
-  type = string
-}
-
-variable "cluster_name" {
-  description = "Name of the eks cluster"
-  type = string
-}
+  

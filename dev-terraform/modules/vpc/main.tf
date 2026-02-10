@@ -33,7 +33,7 @@ resource "aws_subnet" "apiAppEKS-publicSubnet-2b" {
   cidr_block = var.public_cidr_2b
   availability_zone = var.availability_zone_2b
   tags = {
-    Name = "apiAppEKS-publicSubnet"
+    Name = "apiAppEKS-publicSubnet-2b"
     "kubernetes.io/cluster/${var.cluster_name}" = "owned"
     "kubernetes.io/role/elb" = "1"
   }

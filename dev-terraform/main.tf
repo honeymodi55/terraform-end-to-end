@@ -73,7 +73,4 @@ module "eks" {
   }
   tags = {
     Name = "apiApp-cluster"
-    Environment = "dev"
-    Terraform = "true"
-  }
-}
+    Environment 
