@@ -49,7 +49,7 @@ resource "aws_eip" "apiAppElasticIP" {
 }
 resource "aws_nat_gateway" "ApiAppEKS-NAT" {
   allocation_id = aws_eip.apiAppElasticIP.id
-  subnet_id = aws_subnet.apiAppEKS-publicSubnet.id
+  subnet_id = aws_subnet.apiAppEKS-publicSubnet-2a.id
   tags = {
     Name = "ApiAppEKS-NAT"
   }
