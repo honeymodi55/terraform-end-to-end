@@ -4,4 +4,5 @@ public_cidr_2b = "10.0.2.0/24"
 private_cidr_2a = "10.0.10.0/24"
 private_cidr_2b = "10.0.11.0/24"
 availability_zone_2a = "us-west-2a"
-availability_zone_2b = "us-west-2
+availability_zone_2b = "us-west-2b"
+cluster_name = "apiApp-cluster"

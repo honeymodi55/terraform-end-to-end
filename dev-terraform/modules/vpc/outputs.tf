@@ -10,4 +10,8 @@ output "public_subnet_id_2b" {
 }
 
 output "private_subnet_id_2a" {
-  value = aws_subnet.apiAppEKS-privateSubnet-2a.
+  value = aws_subnet.apiAppEKS-privateSubnet-2a.id
+}
+output "private_subnet_id_2b" {
+  value = aws_subnet.apiAppEKS-privateSubnet-2b.id
+}
