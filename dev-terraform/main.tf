@@ -64,6 +64,9 @@ module "eks" {
   #EKS managed node groups
   eks_managed_node_groups = {
     api_node = {
+      iam_role_additional_policies = {
+        AmazonEFSCSIDriverPolicy = "arn:aws:iam::aws:policy/service-role/AmazonEFSCSIDriverPolicy"
+      }
       ami_type = "AL2023_x86_64_STANDARD"
       instance_types = ["t3.medium"]
       min_size = 1
@@ -88,3 +91,4 @@ module "efs" {
   # From the official EKS module outputs
   eks_node_security_group_id = module.eks.node_security_group_id
 }
+
